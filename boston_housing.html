@@ -12093,7 +12093,7 @@ Standard deviation of prices: $165171.13154429477
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong> Yes, this model has successfully captured the variation of the target variable. The R^2 value of 0.923 indicates that 92% of the variance in the prediction is predictable from the true values. The highest this value can be is 1 and 0.923 is a very high value.</p>
+<p><strong>Answer:</strong> Yes, this model has successfully captured the variation of the target variable. The R^2 value of 0.923 indicates that 92% of the variance in the prediction is predictable from the true values. The highest this value can be is 1 and 0.923 is a very high value. R^2 is a measure of the difference between a data point and the fitted line, across all data points. Therefore if every single data point lies on the line i.e. there is no difference, then we would have an R^2 value of 1.</p>
 
 </div>
 </div>
@@ -12169,7 +12169,7 @@ Standard deviation of prices: $165171.13154429477
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> Underfitting the data could be the result of insufficient data points used in training the model, which would then yield a bad result in testing too. Conversely, overfitting the model to many training data points would also yield a bad result in testing as it has memorised the training data and is unable to deal with new data points. Striking the right balance between training and testing data and correctly fitting the model to the training data enables the model to correctly handle new testing data.</p>
+<p><strong>Answer: </strong> We split our data into training and testing data in order to avoid underfitting and overfitting of the data. Underfitting the data means that during the training stage our model is too simple and does not learn from the data, which would then yield a bad result in testing too. Conversely, overfitting the model to many training data points would also yield a bad result in testing as it has memorised the training data and is unable to deal with new data points. Striking the right balance between training and testing data and correctly fitting the model to the training data enables the model to correctly handle new testing data, this would be a good fit. It is imperitive that we do not use our testing data during the training stage as it would be overfitting to the testing data and would yield falsely accurate results. However we can use cross-validation which is to further split the training data into a training and cv set which we can use to improve the model.</p>
 
 </div>
 </div>
@@ -13514,7 +13514,7 @@ The maximum depth of 4 should be used according to the graph above. Maximum dept
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong>
-Grid Search is used when we have more than one hyper-parameter and we want to choose the best combination of these parameters. A grid of two parameters would have selected values of each parameter down each axis. For example if we were selecting the best kernel to use with different values of C in a Support Vector Machine. The output of the grid is an array of F1 scores on all the combination of models. We simply select the combination with the highest F1 score.</p>
+Grid Search is used to optimize our selection of hyper-parameters, which can be selecting the best value of a single hyper-parameter or the best combination of multiple. For example if we were selecting the best kernel to use with different values of C in a Support Vector Machine the input would be a dictionary where the keys are individual parameters with values to be tested in the grid search. The algorithm also requires an input for the scoring method, this can be an F1 or R^2 scorer for example. The output of the grid is an array of these scores on all the combination of parameters. We simply select the combination with the highest score. Grid search can be a an inexpensive alternative to evaluating the best combination of parameters as opposed to solving an optimization model to reduce the validation error for all combinations.</p>
 
 </div>
 </div>
@@ -13542,7 +13542,7 @@ Grid Search is used when we have more than one hyper-parameter and we want to ch
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong>
-K-fold cv is a method of splitting the data into training and testing sets. This is essential as we need to avoid overfitting when building the model. Testing the model on the same data it has been trained on would yield a perfect result, but it would not be able to handle yet-unseen data. We split the data into k-number of buckets and train the data k-1 times, with the extra k bucket being used for testing. The average result of the k-number of buckets is used as the final result. This alleviates any bias when using the grid search technique, when only using a specific set of training data.</p>
+K-fold cv is a method of splitting the training data into training and cross-validation sets. This is essential as we need to avoid overfitting when building the model, which may not become apparent until testing. We split the data into k-number of buckets and train the data k-1 times, with the extra k bucket being used for cross-validation. The average result of the k-number of cross-validations is used as the final result to check the performance of the model. This alleviates any bias when using the grid search technique, when only using a specific set of training data. Though we would want to know if the model is overfitting before testing, but we cannot do this without testing, hence why we use cross-validation. The benefit of k-fold cross-validation is that we don't lose more of our training data by further splitting it up, we simply rotate the data being used for training and for cross-validation. Once we have selected the best parameters using grid search and with using k-fold cross-validation, the final step is to use the test set to check the final performance of the model.</p>
 
 </div>
 </div>
